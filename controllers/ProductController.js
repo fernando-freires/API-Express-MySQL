@@ -62,6 +62,21 @@ const getPublishedProduct = async (req, res) => {
     res.status(200).send(products)
 }
 
+// 7 - connect one to many relation Product and Reviews
+const getProductsReviews = async (req, res) => {
+    const id = req.params.id
+
+    const data = await Product.findOne({
+        include: [{
+            model: Review,
+            as: 'review'
+        }],
+        where: { id: id }
+    })
+
+    res.status(200).send(data)
+}
+
 
 module.exports = {
     addProduct,
@@ -69,5 +84,6 @@ module.exports = {
     getOneProducts,
     updateProduct,
     deleteProducts,
-    getPublishedProduct
+    getPublishedProduct,
+    getProductsReviews
 }
