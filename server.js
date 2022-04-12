@@ -21,6 +21,9 @@ app.use(
 const router = require('./routes/productRouter.js')
 app.use('/api/products', router)
 
+// static Images Folder
+app.use('/Images', express.static('./Images'))
+
 // testing API on Chrome
 app.get('/', (req, res) => {
   res.json({ message: 'Hello from api' })
